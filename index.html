@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>DOPE Birds Checker</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { text-align: center; }
+    .row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .option-btn {
+      position: relative;
+      border: 1px solid #ccc;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      background: white;
+      display: flex;
+      align-items: center;
+    }
+    .option-btn:hover .tooltip {
+      display: block;
+    }
+    .tooltip {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      z-index: 100;
+    }
+    button.submit {
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .result { margin-top: 20px; display: none; }
+    .bar { height: 20px; background: lightblue; margin: 5px 0; position: relative; }
+    .bar span { position: absolute; left: 10px; top: 0; }
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>DOPE Birds Checker</h1>
+  <div id="form"></div>
+  <button class="submit" onclick="submitForm()">Submit</button>
+  <div class="loader" id="loader"></div>
+  <div class="result" id="result"></div>
+
+  <script>
+    const questions = [
+      ['gelisah', 'keras', 'gigih', 'tergantung'],
+      ['pengambil risiko', 'suka petualangan', 'teliti', 'sabar'],
+      ['moralistis', 'menyenangkan', 'berkuasa', 'karismatik'],
+      ['gigih', 'berpengaruh', 'logis', 'tulus'],
+      ['tertarik', 'pemberi semangat', 'termotivasi', 'bersedia'],
+      ['optimis', 'praktis', 'akurat', 'dapat diandalkan'],
+      ['tidak terlibat', 'tidak disiplin', 'tidak emosional', 'tidak empati'],
+      ['keras', 'kompetitif', 'perfeksionis', 'suka berkompromi'],
+      ['berpikiran sempit', 'mudah ditebak', 'menuntut', 'suka menyela'],
+      ['impulsif', 'reaktif', 'meminimalkan risiko', 'menghindari risiko'],
+      ['keras', 'serius', 'canggung', 'mudah terangsang emosinya'],
+      ['penuh kasih', 'terdorong', 'ingin tahu', 'penuh semangat'],
+      ['menarik diri', 'pemalu', 'suka memerintah', 'banyak bicara'],
+      ['penurut', 'menyendiri', 'terus terang', 'suka menyombong'],
+      ['pemarah', 'pendendam', 'gegabah', 'penakut'],
+      ['konsisten', 'pencapai', 'teliti', 'pencari'],
+      ['antusias', 'tegas', 'idealis', 'dermawan'],
+      ['damai', 'mandiri', 'konvensional', 'suka bersosialisasi'],
+      ['rumit/penuh pertimbangan', 'keras kepala', 'menghormati', 'ceria'],
+      ['berorientasi tujuan', 'prosedural', 'tidak egois', 'fokus pada orang'],
+    ];
+    const dope = ['Dove', 'Owl', 'Peacock', 'Eagle'];
+    const scores = [0, 0, 0, 0];
+
+    const formEl = document.getElementById('form');
+
+    questions.forEach((opts, qIdx) => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      opts.forEach((opt, i) => {
+        const label = document.createElement('label');
+        label.className = 'option-btn';
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'q' + qIdx;
+        input.value = i;
+        input.style.marginRight = '5px';
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        tooltip.textContent = dope[i];
+
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(opt));
+        label.appendChild(tooltip);
+        row.appendChild(label);
+      });
+      formEl.appendChild(row);
+    });
+
+    function submitForm() {
+      const loader = document.getElementById('loader');
+      const resultBox = document.getElementById('result');
+      loader.style.display = 'block';
+      resultBox.style.display = 'none';
+
+      scores.fill(0);
+      for (let i = 0; i < questions.length; i++) {
+        const selected = document.querySelector('input[name=q' + i + ']:checked');
+        if (selected) scores[+selected.value]++;
+      }
+
+      setTimeout(() => {
+        loader.style.display = 'none';
+        resultBox.style.display = 'block';
+        resultBox.innerHTML = '<h3>Hasil DOPE</h3>';
+        const total = scores.reduce((a, b) => a + b, 0);
+        scores.forEach((val, i) => {
+          const percent = ((val / total) * 100).toFixed(1);
+          const bar = document.createElement('div');
+          bar.className = 'bar';
+          bar.style.width = percent + '%';
+          bar.style.background = ['#1abc9c', '#3498db', '#9b59b6', '#e67e22'][i];
+          bar.innerHTML = `<span>${dope[i]}: ${percent}%</span>`;
+          resultBox.appendChild(bar);
+        });
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
