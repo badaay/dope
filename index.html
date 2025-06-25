@@ -95,6 +95,38 @@
       ['rumit/penuh pertimbangan', 'keras kepala', 'menghormati', 'ceria'],
       ['berorientasi tujuan', 'prosedural', 'tidak egois', 'fokus pada orang'],
     ];
+
+    const dopeDescriptions = [
+  'Pendamai, penyayang, cenderung menghindari konflik, dan peduli pada orang lain.',
+  'Berpikir kritis, fokus pada detail, cermat, dan suka menganalisis sesuatu secara mendalam.',
+  'Ekspresif, menyenangkan, suka tampil, dan penuh energi dalam bersosialisasi.',
+  'Berorientasi pada hasil, berani mengambil keputusan, percaya diri, dan punya kepemimpinan kuat.'
+];
+
+// Deskripsi spesifik per opsi di setiap pertanyaan
+const questionDescriptions = [
+  ['Mudah gelisah dan tidak sabaran', 'Bersikap tegas bahkan keras', 'Memiliki ketekunan tinggi', 'Mengandalkan orang lain untuk keputusan'],
+  ['Senang mengambil risiko', 'Menikmati pengalaman baru', 'Selalu teliti dalam bekerja', 'Sabar dan tenang menghadapi situasi'],
+  ['Teguh pada prinsip moral', 'Ramah dan menyenangkan', 'Berkeinginan untuk memimpin', 'Mempesona dalam berbicara'],
+  ['Gigih mencapai tujuan', 'Dapat memengaruhi orang lain', 'Berpikir secara sistematis', 'Tulus dan jujur tanpa kepura-puraan'],
+  ['Memiliki rasa ingin tahu tinggi', 'Mendorong orang lain untuk maju', 'Termotivasi oleh hasil', 'Mudah setuju membantu orang lain'],
+  ['Percaya diri akan hasil baik', 'Mengutamakan kepraktisan', 'Cermat dalam setiap tugas', 'Bisa diandalkan dalam situasi sulit'],
+  ['Menarik diri dari tanggung jawab', 'Sulit mengatur diri sendiri', 'Tidak menunjukkan perasaan', 'Kurang memiliki empati terhadap sesama'],
+  ['Tegas dan kadang kasar', 'Berorientasi untuk menang', 'Mengejar kesempurnaan', 'Sanggup berkompromi bila perlu'],
+  ['Terbatas dalam pandangan', 'Bersikap biasa saja dan dapat ditebak', 'Sering meminta banyak hal', 'Cenderung menyela orang lain'],
+  ['Cepat bertindak tanpa pikir panjang', 'Bertindak spontan terhadap situasi', 'Selalu berusaha menghindari risiko', 'Takut mencoba hal baru'],
+  ['Bersikap keras terhadap tantangan', 'Serius dalam segala hal', 'Kurang nyaman dalam bersosialisasi', 'Mudah terbawa emosi'],
+  ['Penuh kasih sayang', 'Memiliki semangat tinggi dalam hidup', 'Penasaran dan suka belajar', 'Antusias pada hal yang disukai'],
+  ['Lebih suka menyendiri', 'Tidak percaya diri', 'Suka mengontrol orang lain', 'Senang berbicara banyak'],
+  ['Terlalu menurut pada orang lain', 'Menghindari interaksi sosial', 'Langsung ke pokok masalah', 'Suka membanggakan diri'],
+  ['Cepat marah', 'Suka membalas perlakuan buruk', 'Bertindak tanpa pikir panjang', 'Mudah merasa takut'],
+  ['Konsisten dalam pekerjaan', 'Berambisi untuk sukses', 'Sangat teliti dan rapi', 'Selalu mencari hal baru'],
+  ['Sangat bersemangat', 'Berani menyampaikan pendapat', 'Percaya pada nilai ideal', 'Mudah membantu sesama'],
+  ['Lebih memilih damai daripada konflik', 'Mandiri dan bisa diandalkan', 'Mengikuti aturan yang ada', 'Senang bersosialisasi dengan orang lain'],
+  ['Berpikir kompleks dan mendalam', 'Memegang teguh pendapat sendiri', 'Menghormati semua orang', 'Menyebarkan energi positif'],
+  ['Fokus pada pencapaian tujuan', 'Mengikuti langkah yang jelas', 'Tidak mementingkan diri sendiri', 'Berorientasi pada kesejahteraan orang lain']
+];
+
     const dope = ['Dove', 'Owl', 'Peacock', 'Eagle'];
     const scores = [0, 0, 0, 0];
 
@@ -115,7 +147,7 @@
 
         const tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
-        tooltip.textContent = dope[i];
+        tooltip.textContent = questionDescriptions[qIdx][i];
 
         label.appendChild(input);
         label.appendChild(document.createTextNode(opt));
