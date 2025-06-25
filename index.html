@@ -63,6 +63,24 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    #form, .submit { display: none; }
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
@@ -71,8 +89,26 @@
   <button class="submit" onclick="submitForm()">Submit</button>
   <div class="loader" id="loader"></div>
   <div class="result" id="result"></div>
+   <div class="modal" id="introModal">
+    <div class="modal-content">
+      <h2>Selamat Datang di Tes DOPE</h2>
+      <p>Ada 20 pertanyaan dengan masing-masing 4 pilihan.</p>
+      <p>Tes ini tidak dibatasi waktu, tapi umumnya memakan waktu 5–6 menit.</p>
+      <p>Hasil akan muncul setelah Anda menjawab semua pertanyaan.</p>
+      <p><strong>Petunjuk:</strong> Pilih satu kata yang paling menggambarkan diri Anda untuk setiap soal.<br>
+      Jika ingin tahu arti sebuah kata, arahkan kursor ke pilihan tersebut.</p>
+      <button class="start" onclick="startTest()">Mulai Tes</button>
+    </div>
+  </div>
 
   <script>
+    document.getElementById("introModal").style.display = 'flex';
+
+    function startTest() {
+      document.getElementById("introModal").style.display = 'none';
+      document.getElementById("form").style.display = 'block';
+      document.querySelector(".submit").style.display = 'block';
+    }
     const questions = [
       ['gelisah', 'keras', 'gigih', 'tergantung'],
       ['pengambil risiko', 'suka petualangan', 'teliti', 'sabar'],
@@ -103,8 +139,8 @@
   'Berorientasi pada hasil, berani mengambil keputusan, percaya diri, dan punya kepemimpinan kuat.'
 ];
 
-// Deskripsi spesifik per opsi di setiap pertanyaan
-const questionDescriptions = [
+    // Deskripsi spesifik per opsi di setiap pertanyaan
+    const questionDescriptions = [
   ['Mudah gelisah dan tidak sabaran', 'Bersikap tegas bahkan keras', 'Memiliki ketekunan tinggi', 'Mengandalkan orang lain untuk keputusan'],
   ['Senang mengambil risiko', 'Menikmati pengalaman baru', 'Selalu teliti dalam bekerja', 'Sabar dan tenang menghadapi situasi'],
   ['Teguh pada prinsip moral', 'Ramah dan menyenangkan', 'Berkeinginan untuk memimpin', 'Mempesona dalam berbicara'],
